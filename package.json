@@ -1,0 +1,23 @@
+{
+  "name": "ng_nest",
+  "version": "1.0.0",
+  "description": "Prototype",
+  "main": "npm start",
+  "directories": {
+    "install": "npm i -g @angular/cli@18.2.7",
+    "fs": "",
+    "bs": ""
+  },
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "gh repo clone siddharthJBefree/ng_nest"
+  },
+  "keywords": [
+    "Architecture"
+  ],
+  "author": "Siddharth Jaiswal",
+  "license": "MIT"
+}
