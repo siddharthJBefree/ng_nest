@@ -3,11 +3,6 @@
   "version": "1.0.0",
   "description": "Prototype",
   "main": "npm start",
-  "directories": {
-    "install": "npm i -g @angular/cli@18.2.7",
-    "fs": "",
-    "bs": ""
-  },
   "scripts": {
     "test": "npm test"
   },
