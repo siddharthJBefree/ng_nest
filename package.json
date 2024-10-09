@@ -4,7 +4,9 @@
   "description": "Prototype",
   "main": "npm start",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "posttest": "npm run format",
+    "format": "prettier --loglevel warn --write \"**/*.{html,yml,js,jsx,ts,tsx,css,json,scss,md}\""
   },
   "repository": {
     "type": "git",
