@@ -4,12 +4,15 @@
   "description": "Prototype",
   "main": "npm start",
   "scripts": {
+    "start": "run-p fs bs",
+    "fs": "cd fs && npm start",
+    "bs": "cd bs && npm start",
     "test": "npm test",
     "posttest": "npm run format",
-    "format": "prettier --loglevel warn --write \"**/*.{html,yml,js,jsx,ts,tsx,css,json,scss,md}\"",
+    "format": "prettier --log-level warn --write \"**/*.{html,yml,js,jsx,ts,tsx,css,json,scss,md}\"",
     "preprepare": "npm i -g @angular/cli@18.2.7 husky lint-staged prettier npm-run-all npkill git-removed-branches",
     "prepare": "husky install",
-    "postinstall": "cd fs && npm i && cd .. && cd bs && npm i && cd .. && run-p check-memory-limit increase-memory-limit",
+    "postinstall": "cd fs && npm i && cd .. && cd bs && npm i && cd .. && npm run check-memory-limit && npm run increase-memory-limit",
     "check-memory-limit": "node -e \"console.log(v8.getHeapStatistics().heap_size_limit/(1024*1024))\"",
     "increase-memory-limit": "setx NODE_OPTIONS \"--max-old-space-size=20480\""
   },
@@ -23,7 +26,8 @@
   "author": "Siddharth Jaiswal",
   "license": "MIT",
   "devDependencies": {
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "prettier-plugin-organize-imports": "^4.1.0"
   },
   "lint-staged": {
     "*.{html,yml,js,jsx,ts,tsx,css,json,scss,md}": "prettier --write"
