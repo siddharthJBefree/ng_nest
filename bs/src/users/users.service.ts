@@ -1,5 +1,5 @@
 import {Injectable} from '@nestjs/common';
-import {UserC, UserRoleT} from './users.interface';
+import {UserC, UserRoleT} from './users.dto';
 
 @Injectable()
 export class UsersService {

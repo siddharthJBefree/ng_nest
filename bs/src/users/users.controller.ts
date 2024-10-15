@@ -1,7 +1,7 @@
 import {Body, Controller, Delete, Get, Param, Patch, Post, UseInterceptors} from '@nestjs/common';
 import {NoFilesInterceptor} from '@nestjs/platform-express';
 import {ApiBody, ApiOperation, ApiResponse, ApiTags} from '@nestjs/swagger';
-import {UserC, UserRoleT} from './users.interface';
+import {UserC, UserRoleT} from './users.dto';
 import {UsersService} from './users.service';
 
 @ApiTags('Users')
