@@ -1,9 +1,15 @@
-export interface User {
+export class UserC {
   id: number;
   name: string;
   email: string;
   password: string;
-  role: UserRole | UserRole[];
+  role: UserRoleT[];
 }
 
-export type UserRole = 'ADMIN' | 'USER' | 'INTERN';
+export type UserRoleT = keyof typeof UserRoleE;
+
+export enum UserRoleE {
+  ADMIN,
+  USER,
+  INTERN
+}

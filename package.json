@@ -31,5 +31,9 @@
   },
   "lint-staged": {
     "*.{html,yml,js,jsx,ts,tsx,css,json,scss,md}": "prettier --write"
+  },
+  "dependencies": {
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1"
   }
 }
