@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Param, Patch, Post, UseInterceptors} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseInterceptors} from '@nestjs/common';
 import {NoFilesInterceptor} from '@nestjs/platform-express';
 import {ApiBody, ApiOperation, ApiResponse, ApiTags} from '@nestjs/swagger';
 import {UserC, UserRoleT} from './users.dto';
@@ -38,7 +38,7 @@ export class UsersController {
   @ApiResponse({status: 401, description: 'Unauthorized'})
   @ApiResponse({status: 403, description: 'Forbidden'})
   @ApiResponse({status: 500, description: 'Internal Server Error'})
-  getUserById(@Param('id') id: number) {
+  getUserById(@Param('id', ParseIntPipe) id: number) {
     return this.usersService.getUserById(+id);
   }
 
@@ -111,7 +111,7 @@ export class UsersController {
     }
   })
   @UseInterceptors(NoFilesInterceptor())
-  updateUser(@Param('id') id: number, @Body() user: UserC) {
+  updateUser(@Param('id', ParseIntPipe) id: number, @Body() user: UserC) {
     return this.usersService.updateUser(+id, user);
   }
 
@@ -122,7 +122,7 @@ export class UsersController {
   @ApiResponse({status: 401, description: 'Unauthorized'})
   @ApiResponse({status: 403, description: 'Forbidden'})
   @ApiResponse({status: 500, description: 'Internal Server Error'})
-  deleteUser(@Param('id') id: number) {
+  deleteUser(@Param('id', ParseIntPipe) id: number) {
     return this.usersService.deleteUser(+id);
   }
 }
