@@ -1,4 +1,5 @@
-import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
+import {HttpException, HttpStatus, Inject, Injectable} from '@nestjs/common';
+import {ConnectionT} from '../shared/constants/connection.const';
 import {UserC, UserRoleT} from './users.dto';
 
 @Injectable()
@@ -47,6 +48,7 @@ export class UsersService {
       role: ['INTERN']
     }
   ];
+  constructor(@Inject('CONNECTION') private connection: ConnectionT) {}
 
   getAllUsers(role?: UserRoleT): UserC[] {
     if (!!role) {
