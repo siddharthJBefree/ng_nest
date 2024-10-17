@@ -39,7 +39,11 @@ export class UsersController {
   @ApiResponse({status: 403, description: 'Forbidden'})
   @ApiResponse({status: 500, description: 'Internal Server Error'})
   getUserById(@Param('id', ParseIntPipe) id: number) {
-    return this.usersService.getUserById(+id);
+    try {
+      return this.usersService.getUserById(+id);
+    } catch (error) {
+      return error;
+    }
   }
 
   @Get('email/:email')

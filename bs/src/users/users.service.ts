@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import {UserC, UserRoleT} from './users.dto';
 
 @Injectable()
@@ -56,11 +56,21 @@ export class UsersService {
   }
 
   getUserById(id: number): UserC {
-    return this.userList.find((user: UserC) => user.id === id);
+    const result = this.userList.find((user: UserC) => user.id === id);
+    if (!!result) {
+      return result;
+    } else {
+      throw new HttpException(`User not found with id ${id}`, HttpStatus.NOT_FOUND);
+    }
   }
 
   getUserByEmail(email: string): UserC {
-    return this.userList.find((user: UserC) => user.email === email);
+    const result = this.userList.find((user: UserC) => user.email === email);
+    if (!!result) {
+      return result;
+    } else {
+      throw new HttpException(`User not found with email ${email}`, HttpStatus.NOT_FOUND);
+    }
   }
 
   createUser(user: UserC): UserC {
@@ -75,7 +85,7 @@ export class UsersService {
   updateUser(id: number, user: UserC): UserC {
     const index = this.userList.findIndex((u) => u.id === id);
     if (index === -1) {
-      throw new Error('User not found');
+      throw new HttpException(`User not found with id ${id}`, HttpStatus.NOT_FOUND);
     }
 
     this.userList[index] = {...this.userList[index], ...user, id};
@@ -86,7 +96,7 @@ export class UsersService {
   deleteUser(id: number): number {
     const index = this.userList.findIndex((u) => u.id === id);
     if (index === -1) {
-      throw new Error('User not found');
+      throw new HttpException(`User not found with id ${id}`, HttpStatus.NOT_FOUND);
     }
     this.userList.splice(index, 1);
     return id;
