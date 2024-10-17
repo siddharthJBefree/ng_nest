@@ -1,6 +1,7 @@
 import {Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseInterceptors} from '@nestjs/common';
 import {NoFilesInterceptor} from '@nestjs/platform-express';
 import {ApiBody, ApiOperation, ApiResponse, ApiTags} from '@nestjs/swagger';
+import {ParseEmailPipe} from 'src/shared/pipes/parse-email/parse-email.pipe';
 import {UserC, UserRoleT} from './users.dto';
 import {UsersService} from './users.service';
 
@@ -53,8 +54,12 @@ export class UsersController {
   @ApiResponse({status: 401, description: 'Unauthorized'})
   @ApiResponse({status: 403, description: 'Forbidden'})
   @ApiResponse({status: 500, description: 'Internal Server Error'})
-  getUserByEmail(@Param('email') email: string) {
-    return this.usersService.getUserByEmail(email);
+  getUserByEmail(@Param('email', ParseEmailPipe) email: string) {
+    try {
+      return this.usersService.getUserByEmail(email);
+    } catch (error) {
+      return error;
+    }
   }
 
   @Post()
@@ -85,8 +90,11 @@ export class UsersController {
   @ApiOperation({summary: 'Create User'})
   @UseInterceptors(NoFilesInterceptor())
   createUser(@Body() user: UserC) {
-    console.log(user);
-    return this.usersService.createUser(user);
+    try {
+      return this.usersService.createUser(user);
+    } catch (error) {
+      return error;
+    }
   }
 
   @Patch(':id')
@@ -116,7 +124,11 @@ export class UsersController {
   })
   @UseInterceptors(NoFilesInterceptor())
   updateUser(@Param('id', ParseIntPipe) id: number, @Body() user: UserC) {
-    return this.usersService.updateUser(+id, user);
+    try {
+      return this.usersService.updateUser(+id, user);
+    } catch (error) {
+      return error;
+    }
   }
 
   @Delete(':id')
@@ -127,6 +139,10 @@ export class UsersController {
   @ApiResponse({status: 403, description: 'Forbidden'})
   @ApiResponse({status: 500, description: 'Internal Server Error'})
   deleteUser(@Param('id', ParseIntPipe) id: number) {
-    return this.usersService.deleteUser(+id);
+    try {
+      return this.usersService.deleteUser(+id);
+    } catch (error) {
+      return error;
+    }
   }
 }
