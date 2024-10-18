@@ -62,7 +62,7 @@ export class UsersService {
     if (!!result) {
       return result;
     } else {
-      throw new HttpException(`User not found with id ${id}`, HttpStatus.NOT_FOUND);
+      throw new HttpException(`User not found with id ${id}`, HttpStatus.BAD_REQUEST);
     }
   }
 
@@ -71,7 +71,7 @@ export class UsersService {
     if (!!result) {
       return result;
     } else {
-      throw new HttpException(`User not found with email ${email}`, HttpStatus.NOT_FOUND);
+      throw new HttpException(`User not found with email ${email}`, HttpStatus.BAD_REQUEST);
     }
   }
 
@@ -87,7 +87,7 @@ export class UsersService {
   updateUser(id: number, user: UserC): UserC {
     const index = this.userList.findIndex((u) => u.id === id);
     if (index === -1) {
-      throw new HttpException(`User not found with id ${id}`, HttpStatus.NOT_FOUND);
+      throw new HttpException(`User not found with id ${id}`, HttpStatus.BAD_REQUEST);
     }
 
     this.userList[index] = {...this.userList[index], ...user, id};
@@ -98,7 +98,7 @@ export class UsersService {
   deleteUser(id: number): number {
     const index = this.userList.findIndex((u) => u.id === id);
     if (index === -1) {
-      throw new HttpException(`User not found with id ${id}`, HttpStatus.NOT_FOUND);
+      throw new HttpException(`User not found with id ${id}`, HttpStatus.BAD_REQUEST);
     }
     this.userList.splice(index, 1);
     return id;
