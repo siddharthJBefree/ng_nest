@@ -1,6 +1,7 @@
-import {Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseInterceptors} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseGuards, UseInterceptors} from '@nestjs/common';
 import {NoFilesInterceptor} from '@nestjs/platform-express';
 import {ApiBody, ApiOperation, ApiResponse, ApiTags} from '@nestjs/swagger';
+import {AuthGuard} from 'src/shared/guards/auth/auth.guard';
 import {ParseEmailPipe} from 'src/shared/pipes/parse-email/parse-email.pipe';
 import {UserC, UserRoleT} from './users.dto';
 import {UsersService} from './users.service';
@@ -63,6 +64,7 @@ export class UsersController {
   }
 
   @Post()
+  @UseGuards(AuthGuard)
   @ApiOperation({summary: 'Create User'})
   @ApiResponse({status: 200, description: 'Get all users'})
   @ApiResponse({status: 201, description: 'List Of users are as follow'})
@@ -98,6 +100,7 @@ export class UsersController {
   }
 
   @Patch(':id')
+  @UseGuards(AuthGuard)
   @ApiOperation({summary: 'Update User'})
   @ApiResponse({status: 200, description: 'Get all users'})
   @ApiResponse({status: 201, description: 'List Of users are as follow'})
@@ -123,6 +126,7 @@ export class UsersController {
     }
   })
   @UseInterceptors(NoFilesInterceptor())
+  @UseGuards(AuthGuard)
   updateUser(@Param('id', ParseIntPipe) id: number, @Body() user: UserC) {
     try {
       return this.usersService.updateUser(+id, user);
@@ -132,6 +136,7 @@ export class UsersController {
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard)
   @ApiOperation({summary: 'Delete User'})
   @ApiResponse({status: 200, description: 'Get all users'})
   @ApiResponse({status: 400, description: 'Bad Request'})
