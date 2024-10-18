@@ -1,25 +1,30 @@
-import {IsArray, IsNotEmpty, IsNumber, IsString} from 'class-validator';
+import {IsEmail, IsNotEmpty, IsString, Length} from 'class-validator';
 
 export class UserC {
-  @IsNumber()
+  // @IsNumber()
   id: number;
 
   @IsString()
+  @Length(1, 255)
   @IsNotEmpty({message: 'Name is required'})
   name: string;
 
-  @IsString()
+  @IsEmail()
+  @Length(1, 255)
   @IsNotEmpty({message: 'Email is required'})
   email: string;
 
   @IsString()
+  @Length(1, 255)
   @IsNotEmpty({message: 'Password is required'})
   password: string;
 
-  @IsArray({
-    each: true,
-    message: 'Role should be an array'
-  })
+  // @IsArray({
+  //   each: true,
+  //   message: 'Role should be an array'
+  // })
+  // @ArrayUnique()
+  // @IsString({each: true})
   role: UserRoleT[];
 }
 

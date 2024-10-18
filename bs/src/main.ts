@@ -12,7 +12,13 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   // Validation Pipes Implementation
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transformOptions: {
+        enableImplicitConversion: true
+      }
+    })
+  );
 
   // Cors Implementation
   // app.enableCors();

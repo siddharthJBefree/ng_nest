@@ -76,15 +76,16 @@ export class UsersController {
     schema: {
       type: 'object',
       properties: {
-        name: {type: 'string'},
-        email: {type: 'string'},
-        password: {type: 'string'},
+        name: {type: 'string', example: 'Siddharth Jaiswal'},
+        email: {type: 'string', example: 'siddharth@example.com'},
+        password: {type: 'string', example: 'test@123'},
         role: {
           type: 'array',
           items: {
             type: 'string',
             enum: ['ADMIN', 'USER', 'INTERN']
-          }
+          },
+          example: ['INTERN']
         }
       }
     }
@@ -112,15 +113,17 @@ export class UsersController {
     schema: {
       type: 'object',
       properties: {
-        name: {type: 'string'},
-        email: {type: 'string'},
-        password: {type: 'string'},
+        id: {type: 'number', example: 1},
+        name: {type: 'string', example: 'Siddharth Jaiswal'},
+        email: {type: 'string', example: 'siddharth@example.com'},
+        password: {type: 'string', example: 'test@123'},
         role: {
           type: 'array',
           items: {
             type: 'string',
             enum: ['ADMIN', 'USER', 'INTERN']
-          }
+          },
+          example: ['INTERN']
         }
       }
     }
