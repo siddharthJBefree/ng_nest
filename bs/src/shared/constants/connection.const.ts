@@ -1,23 +1,13 @@
-export const ConnectionConst = Object.freeze({
+import {TypeOrmModuleOptions} from '@nestjs/typeorm';
+import {UserEntity} from '../typeorm/entities/User.entity';
+
+export const MySqlConnectionConst: TypeOrmModuleOptions = Object.freeze({
+  type: 'mysql',
   host: 'localhost',
-  port: 5432,
-  user: 'postgres',
-  password: 'siddharth',
-  database: 'bs'
+  port: 3306,
+  username: 'root',
+  password: '',
+  database: 'bs_local',
+  entities: [UserEntity],
+  synchronize: true
 });
-
-export const DevConnectionConst = Object.freeze({
-  host: '//live-database',
-  port: 3600,
-  user: 'postgres',
-  password: 'siddharth',
-  database: 'bs'
-});
-
-export type ConnectionT = {
-  host: string;
-  port: number;
-  user: string;
-  password: string;
-  database: string;
-};

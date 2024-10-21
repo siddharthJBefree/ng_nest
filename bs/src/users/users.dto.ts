@@ -1,10 +1,5 @@
 import {IsEmail, IsEnum, IsNotEmpty, IsString, Length} from 'class-validator';
-
-export enum UserRoleE {
-  ADMIN = 'ADMIN',
-  USER = 'USER',
-  INTERN = 'INTERN'
-}
+import {UserRoleE} from 'src/shared/enums/roles.enum';
 
 export type UserRoleT = keyof typeof UserRoleE;
 
