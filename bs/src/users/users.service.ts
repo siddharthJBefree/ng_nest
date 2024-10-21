@@ -1,4 +1,7 @@
 import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
+import {InjectRepository} from '@nestjs/typeorm';
+import {UserEntity} from 'src/shared/type-orm/entities/user.entity';
+import {Repository} from 'typeorm';
 import {UserC, UserRoleT} from './users.dto';
 
 @Injectable()
@@ -47,7 +50,7 @@ export class UsersService {
       role: ['INTERN']
     }
   ];
-  constructor() {}
+  constructor(@InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>) {}
 
   getAllUsers(role?: UserRoleT): UserC[] {
     if (!!role) {
@@ -74,31 +77,43 @@ export class UsersService {
     }
   }
 
-  createUser(user: UserC): UserC {
-    const highestId = Math.max(...this.userList.map((user) => user.id));
-    const newUser = {...user, id: highestId + 1};
-    this.userList.push(newUser);
+  async createUser(user: UserC): Promise<UserC> {
+    const newUser = this.userRepository.create(user);
+    console.log(newUser);
 
-    return newUser;
+    try {
+      const result = await this.userRepository.save(newUser);
+      console.log(result);
+
+      return user;
+    } catch (error) {
+      console.error(error);
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
   }
 
-  updateUser(id: number, user: UserC): UserC {
-    const index = this.userList.findIndex((u) => u.id === id);
-    if (index === -1) {
-      throw new HttpException(`User not found with id ${id}`, HttpStatus.BAD_REQUEST);
+  async updateUser(id: number, user: UserC): Promise<UserC> {
+    const newUser = {...user, id: id};
+    try {
+      const result = this.userRepository.update({id}, newUser);
+      console.log(result);
+
+      return newUser;
+    } catch (error) {
+      console.error(error);
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }
-
-    this.userList[index] = {...this.userList[index], ...user, id};
-
-    return this.userList[index];
   }
 
   deleteUser(id: number): number {
-    const index = this.userList.findIndex((u) => u.id === id);
-    if (index === -1) {
-      throw new HttpException(`User not found with id ${id}`, HttpStatus.BAD_REQUEST);
+    try {
+      const result = this.userRepository.delete({id});
+      console.log(result);
+
+      return id;
+    } catch (error) {
+      console.error(error);
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }
-    this.userList.splice(index, 1);
-    return id;
   }
 }
