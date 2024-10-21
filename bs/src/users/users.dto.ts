@@ -1,4 +1,12 @@
-import {IsEmail, IsNotEmpty, IsString, Length} from 'class-validator';
+import {IsEmail, IsEnum, IsNotEmpty, IsString, Length} from 'class-validator';
+
+export enum UserRoleE {
+  ADMIN = 'ADMIN',
+  USER = 'USER',
+  INTERN = 'INTERN'
+}
+
+export type UserRoleT = keyof typeof UserRoleE;
 
 export class UserC {
   // @IsNumber()
@@ -19,19 +27,6 @@ export class UserC {
   @IsNotEmpty({message: 'Password is required'})
   password: string;
 
-  // @IsArray({
-  //   each: true,
-  //   message: 'Role should be an array'
-  // })
-  // @ArrayUnique()
-  // @IsString({each: true})
+  @IsEnum(UserRoleE, {each: true})
   role: UserRoleT[];
-}
-
-export type UserRoleT = keyof typeof UserRoleE;
-
-export enum UserRoleE {
-  ADMIN,
-  USER,
-  INTERN
 }

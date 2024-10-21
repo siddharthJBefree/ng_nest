@@ -79,7 +79,6 @@ export class UsersService {
     const highestId = Math.max(...this.userList.map((user) => user.id));
     const newUser = {...user, id: highestId + 1};
     this.userList.push(newUser);
-    console.log(newUser);
 
     return newUser;
   }
