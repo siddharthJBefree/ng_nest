@@ -23,5 +23,5 @@ export class UserC {
   password: string;
 
   @IsEnum(UserRoleE, {each: true})
-  role: UserRoleT[];
+  role: UserRoleT;
 }

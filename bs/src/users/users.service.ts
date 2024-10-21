@@ -12,42 +12,42 @@ export class UsersService {
       name: 'Siddharth Jaiswal',
       email: 'siddharth@example.com',
       password: '123456',
-      role: ['ADMIN']
+      role: 'ADMIN'
     },
     {
       id: 2,
       name: 'John Doe',
       email: 'john@example.com',
       password: '123456',
-      role: ['USER']
+      role: 'USER'
     },
     {
       id: 3,
       name: 'Jane Doe',
       email: 'jane@example.com',
       password: '123456',
-      role: ['USER']
+      role: 'USER'
     },
     {
       id: 4,
       name: 'Bob Smith',
       email: 'bob@example.com',
       password: '123456',
-      role: ['USER']
+      role: 'USER'
     },
     {
       id: 5,
       name: 'Alice Johnson',
       email: 'alice@example.com',
       password: '123456',
-      role: ['INTERN']
+      role: 'INTERN'
     },
     {
       id: 6,
       name: 'Michael Brown',
       email: 'michael@example.com',
       password: '123456',
-      role: ['INTERN']
+      role: 'INTERN'
     }
   ];
   constructor(@InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>) {}

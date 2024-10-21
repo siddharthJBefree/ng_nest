@@ -32,6 +32,6 @@ export class UserEntity {
   })
   updatedAt: Date;
 
-  @Column({type: 'enum', nullable: true, array: true, enum: UserRoleE})
-  role: string[];
+  @Column({type: 'enum', nullable: true, enum: UserRoleE})
+  role: string;
 }

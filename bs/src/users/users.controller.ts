@@ -80,12 +80,12 @@ export class UsersController {
         email: {type: 'string', example: 'siddharth@example.com'},
         password: {type: 'string', example: 'test@123'},
         role: {
-          type: 'array',
+          type: 'string',
           items: {
             type: 'string',
             enum: ['ADMIN', 'USER', 'INTERN']
           },
-          example: ['INTERN']
+          example: 'INTERN'
         }
       }
     }
@@ -118,12 +118,12 @@ export class UsersController {
         email: {type: 'string', example: 'siddharth@example.com'},
         password: {type: 'string', example: 'test@123'},
         role: {
-          type: 'array',
+          type: 'string',
           items: {
             type: 'string',
             enum: ['ADMIN', 'USER', 'INTERN']
           },
-          example: ['INTERN']
+          example: 'INTERN'
         }
       }
     }
