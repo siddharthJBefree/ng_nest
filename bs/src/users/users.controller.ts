@@ -1,6 +1,7 @@
 import {Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseGuards, UseInterceptors} from '@nestjs/common';
 import {NoFilesInterceptor} from '@nestjs/platform-express';
 import {ApiBody, ApiOperation, ApiResponse, ApiTags} from '@nestjs/swagger';
+import {UserRoleE} from 'src/shared/enums/roles.enum';
 import {AuthGuard} from 'src/shared/guards/auth/auth.guard';
 import {ParseEmailPipe} from 'src/shared/pipes/parse-email/parse-email.pipe';
 import {UserC, UserRoleT} from './users.dto';
@@ -81,10 +82,7 @@ export class UsersController {
         password: {type: 'string', example: 'test@123'},
         role: {
           type: 'string',
-          items: {
-            type: 'string',
-            enum: ['ADMIN', 'USER', 'INTERN']
-          },
+          enum: Object.values(UserRoleE),
           example: 'INTERN'
         }
       }
@@ -119,10 +117,7 @@ export class UsersController {
         password: {type: 'string', example: 'test@123'},
         role: {
           type: 'string',
-          items: {
-            type: 'string',
-            enum: ['ADMIN', 'USER', 'INTERN']
-          },
+          enum: Object.values(UserRoleE),
           example: 'INTERN'
         }
       }
