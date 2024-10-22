@@ -22,6 +22,6 @@ export class UserC {
   @IsNotEmpty({message: 'Password is required'})
   password: string;
 
-  @IsEnum(UserRoleE, {each: true})
+  @IsEnum(UserRoleE)
   role: UserRoleT;
 }

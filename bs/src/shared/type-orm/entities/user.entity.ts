@@ -1,3 +1,4 @@
+import {UserRoleT} from 'src/users/users.dto';
 import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
 import {UserRoleE} from '../../enums/roles.enum';
 
@@ -33,5 +34,5 @@ export class UserEntity {
   updatedAt: Date;
 
   @Column({type: 'enum', nullable: true, enum: UserRoleE})
-  role: string;
+  role: UserRoleT;
 }
