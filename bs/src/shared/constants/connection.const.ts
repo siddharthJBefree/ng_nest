@@ -3,10 +3,10 @@ import {UserEntity} from '../type-orm/entities/user.entity';
 
 export const MySqlConnectionConst: TypeOrmModuleOptions = Object.freeze({
   type: 'mysql',
-  host: 'localhost',
-  port: 3306,
-  username: 'root',
-  password: '',
+  host: process?.env?.DB_HOST || 'localhost',
+  port: +process?.env?.DB_PORT || 3306,
+  username: process?.env?.DB_USER_NAME || 'root',
+  password: process?.env?.DB_PASSWORD || '',
   database: 'bs_local',
   entities: [UserEntity],
   synchronize: true
