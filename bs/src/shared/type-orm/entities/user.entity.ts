@@ -1,9 +1,18 @@
 import {UserRoleT} from 'src/users/users.dto';
-import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+  VersionColumn
+} from 'typeorm';
 import {UserRoleE} from '../../enums/roles.enum';
 
 @Entity({name: 'user_list'})
-export class UserEntity {
+export class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn({type: 'bigint'})
   id: number;
 
@@ -16,23 +25,24 @@ export class UserEntity {
   @Column({nullable: false})
   password: string;
 
-  @Column({
-    name: 'created_at',
-    type: 'timestamp',
-    nullable: false,
-    default: () => 'CURRENT_TIMESTAMP'
-  })
-  createdAt: Date;
-
-  @Column({
-    name: 'updated_at',
-    type: 'timestamp',
-    nullable: true,
-    default: () => 'CURRENT_TIMESTAMP',
-    onUpdate: 'CURRENT_TIMESTAMP'
-  })
-  updatedAt: Date;
-
   @Column({type: 'enum', nullable: true, enum: UserRoleE})
   role: UserRoleT;
+
+  // @Column({
+  //   type: 'text',
+  //   nullable: true
+  // })
+  // roles: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedDate: Date;
+
+  @VersionColumn()
+  version: number;
 }
