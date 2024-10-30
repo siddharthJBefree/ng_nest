@@ -55,7 +55,7 @@ export class UsersService {
   async updateUser(id: number, user: UserC): Promise<UserC> {
     const newUser = {...user, id: id};
     try {
-      const result = await this.userRepository.update({id}, newUser);
+      const result = await this.userRepository.update({id}, newUser as UserEntity);
       console.log(result);
 
       return newUser;

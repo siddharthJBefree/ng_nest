@@ -28,11 +28,17 @@ export class UserEntity extends BaseEntity {
   @Column({type: 'enum', nullable: true, enum: UserRoleE})
   role: UserRoleT;
 
-  // @Column({
-  //   type: 'text',
-  //   nullable: true
-  // })
-  // roles: string;
+  @Column({
+    type: 'simple-array',
+    nullable: true
+  })
+  role_list: Array<UserRoleT>;
+
+  @Column({
+    type: 'simple-json',
+    nullable: true
+  })
+  flag_list: {[key in string]: any};
 
   @CreateDateColumn()
   createdAt: Date;

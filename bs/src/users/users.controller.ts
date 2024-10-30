@@ -119,7 +119,16 @@ export class UsersController {
         role: {
           type: 'string',
           enum: Object.values(UserRoleE),
-          example: 'INTERN'
+          example: 'USER'
+        },
+        role_list: {
+          type: 'array',
+          enum: Object.values(UserRoleE),
+          example: ['USER', 'ADMIN']
+        },
+        flag_list: {
+          type: 'object',
+          example: {is_active: true, data: 'test'}
         }
       }
     }
