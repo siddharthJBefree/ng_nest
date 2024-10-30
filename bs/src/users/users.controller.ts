@@ -4,6 +4,7 @@ import {ApiBody, ApiOperation, ApiResponse, ApiTags} from '@nestjs/swagger';
 import {UserRoleE} from 'src/shared/enums/roles.enum';
 import {AuthGuard} from 'src/shared/guards/auth/auth.guard';
 import {ParseEmailPipe} from 'src/shared/pipes/parse-email/parse-email.pipe';
+import {ParseEnumPipe} from '../shared/pipes/parse-enum/parse-enum.pipe';
 import {UserC, UserRoleT} from './users.dto';
 import {UsersService} from './users.service';
 
@@ -30,7 +31,7 @@ export class UsersController {
   @ApiResponse({status: 401, description: 'Unauthorized'})
   @ApiResponse({status: 403, description: 'Forbidden'})
   @ApiResponse({status: 500, description: 'Internal Server Error'})
-  getAllUsersByRole(@Param('role') role: UserRoleT) {
+  getAllUsersByRole(@Param('role', new ParseEnumPipe(UserRoleE)) role: UserRoleT) {
     return this.usersService.getAllUsers(role);
   }
 

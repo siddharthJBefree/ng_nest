@@ -8,16 +8,20 @@ import {UserC, UserRoleT} from './users.dto';
 export class UsersService {
   constructor(@InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>) {}
 
-  getAllUsers(role?: UserRoleT): Promise<Array<UserC>> {
+  async getAllUsers(role?: UserRoleT): Promise<Array<UserC>> {
     if (!!role) {
-      const result = this.userRepository.find({where: {role}});
+      const result = await this.userRepository.find({where: {role}});
+      console.log(result);
       return result;
     }
-    return this.userRepository.find();
+    const result = await this.userRepository.find();
+    console.log(result);
+    return result;
   }
 
-  getUserById(id: number): Promise<UserC> {
-    const result = this.userRepository.findOne({where: {id}});
+  async getUserById(id: number): Promise<UserC> {
+    const result = await this.userRepository.findOne({where: {id}});
+    console.log(result);
     if (!!result) {
       return result;
     } else {
@@ -26,7 +30,8 @@ export class UsersService {
   }
 
   async getUserByEmail(email: string): Promise<UserC> {
-    const result = this.userRepository.findOne({where: {email}});
+    const result = await this.userRepository.findOne({where: {email}});
+    console.log(result);
     if (!!result) {
       return result;
     } else {
@@ -50,7 +55,7 @@ export class UsersService {
   async updateUser(id: number, user: UserC): Promise<UserC> {
     const newUser = {...user, id: id};
     try {
-      const result = this.userRepository.update({id}, newUser);
+      const result = await this.userRepository.update({id}, newUser);
       console.log(result);
 
       return newUser;
@@ -60,9 +65,9 @@ export class UsersService {
     }
   }
 
-  deleteUser(id: number): number {
+  async deleteUser(id: number): Promise<number> {
     try {
-      const result = this.userRepository.delete({id});
+      const result = await this.userRepository.delete({id});
       console.log(result);
 
       return id;
