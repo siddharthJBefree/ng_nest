@@ -3,8 +3,8 @@ import {TypeOrmModule} from '@nestjs/typeorm';
 import {AppController} from './app.controller';
 import {AppService} from './app.service';
 import {AuthModule} from './auth/auth.module';
-import {MySqlConnectionConst} from './shared/constants/connection.const';
-import {LoggerMiddleware} from './shared/middleware/logger/logger.middleware';
+import {MySqlConnectionConst} from './core/connections/db-connection.const';
+import {LoggerMiddleware} from './shared/middleware/logger.middleware';
 import {UsersModule} from './users/users.module';
 
 @Module({

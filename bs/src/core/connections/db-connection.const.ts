@@ -1,5 +1,5 @@
 import {TypeOrmModuleOptions} from '@nestjs/typeorm';
-import {UserEntity} from '../type-orm/entities/user.entity';
+import {UserEntity} from '../database/tables/user.entity';
 
 export const MySqlConnectionConst: TypeOrmModuleOptions = Object.freeze({
   type: 'mysql',

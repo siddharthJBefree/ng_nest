@@ -2,9 +2,9 @@ import {Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseGuar
 import {NoFilesInterceptor} from '@nestjs/platform-express';
 import {ApiBody, ApiOperation, ApiResponse, ApiTags} from '@nestjs/swagger';
 import {UserRoleE} from 'src/shared/enums/roles.enum';
-import {AuthGuard} from 'src/shared/guards/auth/auth.guard';
-import {ParseEmailPipe} from 'src/shared/pipes/parse-email/parse-email.pipe';
-import {ParseEnumPipe} from '../shared/pipes/parse-enum/parse-enum.pipe';
+import {AuthGuard} from 'src/shared/guards/auth.guard';
+import {ParseEmailPipe} from 'src/shared/pipes/parse-email.pipe';
+import {ParseEnumPipe} from '../shared/pipes/parse-enum.pipe';
 import {UserC, UserRoleT} from './users.dto';
 import {UsersService} from './users.service';
 

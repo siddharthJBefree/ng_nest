@@ -9,7 +9,7 @@ import {
   UpdateDateColumn,
   VersionColumn
 } from 'typeorm';
-import {UserRoleE} from '../../enums/roles.enum';
+import {UserRoleE} from '../../../shared/enums/roles.enum';
 
 @Entity({name: 'user_list'})
 export class UserEntity extends BaseEntity {
