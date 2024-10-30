@@ -1,19 +1,32 @@
-import {IsBoolean, IsEmail, IsEnum, IsNotEmpty, IsObject, IsString, Length} from 'class-validator';
+import {IsEmail, IsEnum, IsNotEmpty, IsNumber, IsObject, IsString, Length, ValidateIf} from 'class-validator';
+import {OperationE} from 'src/shared/enums/operation.enum';
 import {UserRoleE} from 'src/shared/enums/roles.enum';
 
 export type UserRoleT = keyof typeof UserRoleE;
 
 export class UserC {
-  // @IsNumber()
+  @IsNumber()
+  @ValidateIf((_, context) => context?.[OperationE.UPDATE] === true) // Only validate if createMode is true
+  @IsNotEmpty()
   id: number;
 
   @IsString()
   @Length(1, 255)
-  @IsNotEmpty({message: 'Name is required'})
-  name: string;
+  @IsNotEmpty({message: 'First Name is required'})
+  firstName: string;
+
+  @IsString()
+  @Length(0, 255)
+  @IsNotEmpty({message: 'Middle Name is required'})
+  middleName: string;
+
+  @IsString()
+  @Length(0, 255)
+  @IsNotEmpty({message: 'Last Name is required'})
+  lastName: string;
 
   @IsEmail()
-  @Length(1, 255)
+  @Length(3, 255)
   @IsNotEmpty({message: 'Email is required'})
   email: string;
 
@@ -26,16 +39,8 @@ export class UserC {
   role: UserRoleT;
 
   @IsEnum(UserRoleE, {each: true})
-  role_list: Array<UserRoleT>;
+  roleList: Array<UserRoleT>;
 
   @IsObject()
-  flag_list: {[key in string]: boolean};
-}
-
-class FlagList {
-  @IsBoolean()
-  is_active: boolean;
-
-  @IsBoolean()
-  is_active2: boolean;
+  flagList: {[key in string]: boolean};
 }

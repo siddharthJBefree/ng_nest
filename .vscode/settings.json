@@ -1,4 +1,4 @@
 {
   "prettier.tabWidth": 2,
-  "cSpell.words": ["Befree", "loglevel", "nestjs", "npkill", "posttest", "preprepare", "setx"]
+  "cSpell.words": ["Befree", "devkit", "loglevel", "nestjs", "npkill", "posttest", "preprepare", "setx", "typeorm"]
 }

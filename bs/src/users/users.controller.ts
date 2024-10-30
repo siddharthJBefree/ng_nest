@@ -78,18 +78,28 @@ export class UsersController {
     schema: {
       type: 'object',
       properties: {
-        name: {type: 'string', example: 'Siddharth Jaiswal'},
+        firstName: {type: 'string', example: 'Siddharth'},
+        middleName: {type: 'string', example: 'H'},
+        lastName: {type: 'string', example: 'Jaiswal'},
         email: {type: 'string', example: 'siddharth@example.com'},
         password: {type: 'string', example: 'test@123'},
         role: {
           type: 'string',
           enum: Object.values(UserRoleE),
-          example: 'INTERN'
+          example: 'USER'
+        },
+        roleList: {
+          type: 'array',
+          enum: Object.values(UserRoleE),
+          example: ['USER', 'ADMIN']
+        },
+        flagList: {
+          type: 'object',
+          example: {is_active: true, data: 'test'}
         }
       }
     }
   })
-  @ApiOperation({summary: 'Create User'})
   @UseInterceptors(NoFilesInterceptor())
   createUser(@Body() user: UserC) {
     try {
@@ -113,7 +123,9 @@ export class UsersController {
       type: 'object',
       properties: {
         id: {type: 'number', example: 1},
-        name: {type: 'string', example: 'Siddharth Jaiswal'},
+        firstName: {type: 'string', example: 'Siddharth'},
+        middleName: {type: 'string', example: 'H'},
+        lastName: {type: 'string', example: 'Jaiswal'},
         email: {type: 'string', example: 'siddharth@example.com'},
         password: {type: 'string', example: 'test@123'},
         role: {
@@ -121,12 +133,12 @@ export class UsersController {
           enum: Object.values(UserRoleE),
           example: 'USER'
         },
-        role_list: {
+        roleList: {
           type: 'array',
           enum: Object.values(UserRoleE),
           example: ['USER', 'ADMIN']
         },
-        flag_list: {
+        flagList: {
           type: 'object',
           example: {is_active: true, data: 'test'}
         }
